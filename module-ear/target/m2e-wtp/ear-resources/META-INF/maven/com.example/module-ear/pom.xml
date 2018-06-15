@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>application</artifactId>
+		<groupId>com.example</groupId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>module-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>module-ejb</artifactId>
+			<type>ejb</type>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>was6-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>installApp</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<wasHome>${was61home}</wasHome>
+					<host>deploymentmanager.your.domain</host>
+					<username>admin</username>
+					<password>adminpassword</password>
+					<targetCluster>nameOfCluster</targetCluster>
+					<profileName>Dmgr01</profileName>
+					<conntype>SOAP</conntype>
+					<port>8879</port>
+					<verbose>true</verbose>
+					<updateExisting>false</updateExisting>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
